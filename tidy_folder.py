@@ -4,10 +4,17 @@ import datetime
 
 def main():
     # folder names and extensions' name
-    files = {"executables" : [".exe"], 
-            "torrent files" : [".torrent"], 
-            "pdf files" : [".pdf"],
-            "zip files" : [".zip"]}
+    files = {"Audio files" : [".aif", ".cda", ".mid", ".midi", ".mp3", ".mpa", ".ogg", ".wav", ".wma", ".wpl"], 
+            "Torrent files" : [".torrent"], 
+            "Compressed files" : [".zip", ".7z", ".arj", ".deb", ".pkg", ".rar", ".rpm", ".tar.gz", ".z"],
+            "Disc and media files" : [".bin", ".dmg", ".iso", ".toast", ".vcd"],
+            "Data and database files" : [".csv", ".dat", ".db", ".dbf", ".log", ".sav", ".sql", ".tar", ".xml"],
+            "Image files" : [".ai", ".bmp", ".gif", ".ico", ".jpeg", ".jpg", ".png", ".ps", ".psd", ".svg", ".tif", ".tiff"],
+            "Presentation files" : [".key", ".odp", ".pps", ".ppt", ".pptx"],
+            "Programming files" : [".c", ".class", ".cpp", ".cs", ".h", ".java", ".pl", ".sh", ".swift", ".vb", ".py"],
+            "Executable files" : [".apk", ".bat", ".bin", ".cgi", ".pl", ".com", ".exe", ".gadget", ".jar", ".msi", ".wsf"],
+            "Video files" : [".3g2", ".3gb", ".avi", ".flv", ".h264", ".m4v", ".mkv", ".mov", ".mp4", ".mpg", ".mpeg", ".rm", ".swf", ".vob", ".wmv"],
+            "Word processor and text files" : [".doc", ".docx", ".odt", ".pdf", ".rtf", ".tex", ".txt", ".wpd"]}
 
     # Check if arguments is valid
     if len(sys.argv) != 2:
@@ -39,6 +46,10 @@ def main():
 
     # loop in files in the base folder
     for file_name in os.listdir(base_path):
+
+        # if file is the history file than skip
+        if file_name == "history.txt": continue
+        
         # loop in files dict
         for folder_name, extensions in files.items():
             
@@ -74,7 +85,7 @@ def main():
                 f.write(f"filename: {file_name}\n")
                 f.write(f"source path: {src_path}\n")
                 f.write(f"destionation path: {dst_path}\n")
-            
+
             # print line between details
             f.write("-"*100 + "\n")
 
@@ -100,8 +111,9 @@ def extension_checker(extensions, file_name):
         # if extension is not matched pass this loop
         if (file_name.endswith(extension)) == True: 
             return True
-        # if extensions not matched with the file's extension
-        return False
+
+    # if extensions not matched with the file's extension
+    return False
 
 # stars the program
 main()
