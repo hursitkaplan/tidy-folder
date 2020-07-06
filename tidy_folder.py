@@ -1,20 +1,13 @@
-import os, shutil
-import sys
+import os, shutil, sys
+import ast
 import datetime
 
 def main():
     # folder names and extensions' name
-    files = {"Audio files" : [".aif", ".cda", ".mid", ".midi", ".mp3", ".mpa", ".ogg", ".wav", ".wma", ".wpl"], 
-            "Torrent files" : [".torrent"], 
-            "Compressed files" : [".zip", ".7z", ".arj", ".deb", ".pkg", ".rar", ".rpm", ".tar.gz", ".z"],
-            "Disc and media files" : [".bin", ".dmg", ".iso", ".toast", ".vcd"],
-            "Data and database files" : [".csv", ".dat", ".db", ".dbf", ".log", ".sav", ".sql", ".tar", ".xml"],
-            "Image files" : [".ai", ".bmp", ".gif", ".ico", ".jpeg", ".jpg", ".png", ".ps", ".psd", ".svg", ".tif", ".tiff"],
-            "Presentation files" : [".key", ".odp", ".pps", ".ppt", ".pptx"],
-            "Programming files" : [".c", ".class", ".cpp", ".cs", ".h", ".java", ".pl", ".sh", ".swift", ".vb", ".py"],
-            "Executable files" : [".apk", ".bat", ".bin", ".cgi", ".pl", ".com", ".exe", ".gadget", ".jar", ".msi", ".wsf"],
-            "Video files" : [".3g2", ".3gb", ".avi", ".flv", ".h264", ".m4v", ".mkv", ".mov", ".mp4", ".mpg", ".mpeg", ".rm", ".swf", ".vob", ".wmv"],
-            "Word processor and text files" : [".doc", ".docx", ".odt", ".pdf", ".rtf", ".tex", ".txt", ".wpd"]}
+    # read files dictionary from text file using literal_eval
+    with open('files.txt', 'r') as f:
+        temp = f.read()
+        files = ast.literal_eval(temp)
 
     # Check if arguments is valid
     if len(sys.argv) != 2:
